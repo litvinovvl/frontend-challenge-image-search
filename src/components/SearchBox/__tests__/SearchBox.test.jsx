@@ -1,3 +1,4 @@
+import React from 'react';
 import { shallow } from 'enzyme';
 
 import SearchBox from '../SearchBox';
@@ -5,7 +6,7 @@ import SearchBox from '../SearchBox';
 const props = {
   fullScreen: true,
   onSubmit: jest.fn(),
-}
+};
 
 describe('App', () => {
   beforeEach(() => {

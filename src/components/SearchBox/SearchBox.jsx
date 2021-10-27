@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import './style.scss';
 
-const SearchBox = ({ fullScreen, onSubmit }) => {
+const SearchBox = ({ isLoading, fullScreen, onSubmit }) => {
   const [query, setQuery] = useState('');
 
   const handleSubmit = (e) => {
@@ -21,17 +21,21 @@ const SearchBox = ({ fullScreen, onSubmit }) => {
         placeholder="What images would ypu like to see on Pixabay?"
         onChange={handleChange}
       />
-      <button type="submit" className="search-btn">Search</button>
+      <button type="submit" className="search-btn">
+        {isLoading ? 'Searching' : 'Search'}
+      </button>
     </form>
   );
 };
 
 SearchBox.defaultProps = {
   fullScreen: true,
+  isLoading: false,
 };
 
 SearchBox.propTypes = {
   fullScreen: PropTypes.bool,
+  isLoading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
 };
 

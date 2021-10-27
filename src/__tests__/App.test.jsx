@@ -1,3 +1,4 @@
+import React from 'react';
 import { shallow } from 'enzyme';
 
 import App from '../App';
@@ -8,11 +9,9 @@ import * as helpers from '../helpers';
 const data = { hits: [{ id: 1, webformatURL: 'test_url', tags: 'tags' }] };
 
 jest.mock('../helpers', () => ({
-  fetchImages: jest.fn(() =>
-    Promise.resolve({
-      json: () => Promise.resolve({ hits: [{ id: 1, webformatURL: 'test_url', tags: 'tags' }] }),
-    })
-  )
+  fetchImages: jest.fn(() => Promise.resolve({
+    json: () => Promise.resolve({ hits: [{ id: 1, webformatURL: 'test_url', tags: 'tags' }] }),
+  })),
 }));
 
 describe('App', () => {
@@ -42,7 +41,6 @@ describe('App', () => {
   it('should pass right props to inner components after images loaded', async () => {
     const component = shallow(<App />);
     const Search = component.find(SearchBox);
-    const Grid = component.find(ImagesGrid);
 
     Search.props().onSubmit('query');
     component.update();
@@ -64,11 +62,10 @@ describe('App', () => {
   });
 
   it('should pass error to inner component after images load failed', async () => {
-   helpers.fetchImages.mockImplementation(jest.fn(Promise.reject))
+    helpers.fetchImages.mockImplementation(jest.fn(Promise.reject));
 
     const component = shallow(<App />);
     const Search = component.find(SearchBox);
-    const Grid = component.find(ImagesGrid);
 
     await Search.props().onSubmit('query');
     component.update();
