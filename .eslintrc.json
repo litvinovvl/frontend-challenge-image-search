@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": ["airbnb"],
+  "plugins": [
+    "react", "react-hooks"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "ignorePatterns": ["src/index.js"]
+}
