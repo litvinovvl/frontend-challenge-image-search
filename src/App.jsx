@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import SearchBox from './components/SearchBox';
 import ImagesGrid from './components/ImagesGrid';
-import { generateSearchPath } from './helpers';
+import { fetchImages } from './helpers';
 
 import './styles.scss';
 
@@ -18,7 +18,7 @@ const App = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(generateSearchPath(query));
+      const response = await fetchImages(query);
       const data = await response.json();
       setImages(data.hits);
       setIsLoading(false);

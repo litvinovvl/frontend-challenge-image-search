@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should render ImagesGrid properly initially 1`] = `
+<div
+  className="container hidden"
+>
+  <div
+    className="spinner-wrapper"
+  >
+    <ForwardRef(SvgSadFace)
+      hanging={48}
+      width={48}
+    />
+    No results found!
+  </div>
+</div>
+`;
+
+exports[`App should render ImagesGrid properly when error 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="spinner-wrapper"
+  >
+    <ForwardRef(SvgSadFace)
+      hanging={48}
+      width={48}
+    />
+    Something went wrong, try again
+  </div>
+</div>
+`;
+
+exports[`App should render ImagesGrid properly when images loaded 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="images-wrapper"
+  >
+    <img
+      alt="tags"
+      key="1"
+      src="test_url"
+    />
+    <img
+      alt="tags"
+      key="2"
+      src="test_url"
+    />
+  </div>
+</div>
+`;
+
+exports[`App should render ImagesGrid properly when loading 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="spinner-wrapper"
+  >
+    <ForwardRef(SvgThinkFace)
+      hanging={48}
+      width={48}
+    />
+    Loading
+  </div>
+</div>
+`;
+
+exports[`App should render ImagesGrid properly when no images found 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="spinner-wrapper"
+  >
+    <ForwardRef(SvgSadFace)
+      hanging={48}
+      width={48}
+    />
+    No results found!
+  </div>
+</div>
+`;
