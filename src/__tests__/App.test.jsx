@@ -15,9 +15,7 @@ jest.mock('../helpers', () => ({
 }));
 
 describe('App', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+  beforeEach(jest.clearAllMocks);
 
   it('should render App properly', () => {
     const component = shallow(<App />);
@@ -59,6 +57,16 @@ describe('App', () => {
     expect(UpdatedGrid.prop('images')).toEqual(data.hits);
     expect(UpdatedGrid.prop('isLoading')).toBeFalsy();
     expect(UpdatedGrid.prop('error')).toBeFalsy();
+  });
+
+  it('should not refetch if query was not changed', async () => {
+    const component = shallow(<App />);
+
+    await component.find(SearchBox).prop('onSubmit')('query');
+    helpers.fetchImages.mockClear();
+    await component.find(SearchBox).prop('onSubmit')('query');
+
+    expect(helpers.fetchImages).not.toHaveBeenCalled();
   });
 
   it('should pass error to inner component after images load failed', async () => {

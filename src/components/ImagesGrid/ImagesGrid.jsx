@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import ReactModal from 'react-modal';
 
 import { ReactComponent as NoResultsIcon } from '../../assets/images/sad-face.svg';
 import { ReactComponent as LoadingIcon } from '../../assets/images/think-face.svg';
 
 import './style.scss';
 
-const ImagesGrid = ({ images, isLoading, error }) => {
+const ImagesGrid = ({
+  images, isLoading, error,
+}) => {
+  const [openedImage, setOpenedImage] = useState(null);
+  const isModalOpened = Boolean(openedImage);
+
+  const handleImgClick = (image) => () => setOpenedImage(image);
+
+  const handleImgKeyPress = (image) => (e) => {
+    if (e.key === 'Enter') setOpenedImage(image);
+  };
+
   const renderImages = () => {
     if (error) {
       return (
@@ -32,7 +44,20 @@ const ImagesGrid = ({ images, isLoading, error }) => {
         <div className="images-wrapper">
           {
             images.map((image) => (
-              <img key={image.id} src={image.webformatURL} alt={image.tags} />
+              <div
+                key={image.id}
+                role="button"
+                onClick={handleImgClick(image)}
+                onKeyPress={handleImgKeyPress(image)}
+                tabIndex={0}
+              >
+                <img
+                  src={image.webformatURL}
+                  alt={image.tags}
+                  className="image"
+                />
+              </div>
+
             ))
           }
         </div>
@@ -47,9 +72,23 @@ const ImagesGrid = ({ images, isLoading, error }) => {
     );
   };
 
+  const closeModal = () => setOpenedImage(null);
+
   return (
     <div className={classNames('container', { hidden: !images })}>
       {renderImages()}
+      <ReactModal
+        className="modal"
+        overlayClassName="overlay"
+        isOpen={isModalOpened}
+        onRequestClose={closeModal}
+      >
+        {isModalOpened && (
+          <div className="modal-content">
+            <img src={openedImage.largeImageURL} alt={openedImage.tags} className="image" />
+          </div>
+        )}
+      </ReactModal>
     </div>
   );
 };

@@ -6,6 +6,7 @@ exports[`App should render App properly 1`] = `
 >
   <SearchBox
     fullScreen={true}
+    isLoading={false}
     onSubmit={[Function]}
   />
   <ImagesGrid

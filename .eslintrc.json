@@ -3,7 +3,11 @@
     "browser": true,
     "jest": true
   },
-  "extends": ["airbnb"],
+  "extends": [
+    "airbnb",
+    "react-app",
+    "react-app/jest"
+  ],
   "plugins": [
     "react", "react-hooks"
   ],

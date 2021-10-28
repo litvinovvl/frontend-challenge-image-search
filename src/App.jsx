@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import SearchBox from './components/SearchBox';
 import ImagesGrid from './components/ImagesGrid';
@@ -12,7 +11,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [images, setImages] = useState(null);
-  const renderImages = Boolean(images);
+  const shouldRenderImages = Boolean(images);
 
   const searchImages = async (query) => {
     if (lastQuery === query) return;
@@ -27,6 +26,7 @@ const App = () => {
       setImages(data.hits);
       setIsLoading(false);
     } catch (err) {
+      setImages(images || []);
       setError(true);
       setIsLoading(false);
     }
@@ -34,7 +34,11 @@ const App = () => {
 
   return (
     <div className="wrapper">
-      <SearchBox fullScreen={!renderImages} isLoading={isLoading} onSubmit={searchImages} />
+      <SearchBox
+        fullScreen={!shouldRenderImages}
+        isLoading={isLoading}
+        onSubmit={searchImages}
+      />
       <ImagesGrid images={images} isLoading={isLoading} error={error} />
     </div>
   );
